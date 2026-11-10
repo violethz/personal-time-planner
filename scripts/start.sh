@@ -1,0 +1,1 @@
+# Verify the environment, activate or use the virtual environment, and launch Tempo
