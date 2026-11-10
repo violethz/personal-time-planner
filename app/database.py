@@ -26,12 +26,10 @@ CREATE TABLE IF NOT EXISTS tasks (
                                      OR estimated_minutes > 0),
     task_type         TEXT    NOT NULL DEFAULT 'one_time'
                               CHECK (task_type IN ('one_time', 'recurring')),
-    recurrence_rule   TEXT    NOT NULL DEFAULT 'none'
-                            CHECK (recurrence_rule IN (
-                                'none', 'daily', 'weekdays',
-                                'weekly:mon', 'weekly:tue', 'weekly:wed',
-                                'weekly:thu', 'weekly:fri', 'weekly:sat',
-                                'weekly:sun')),
+    recurrence_rule TEXT NOT NULL DEFAULT 'none'
+        CHECK (recurrence_rule IN ('none', 'daily', 'weekdays', 'weekly')),
+    recurrence_weekday INTEGER
+        CHECK (recurrence_weekday IS NULL OR recurrence_weekday BETWEEN 0 AND 6),
     preferred_time    TEXT,   -- HH:MM
     deadline          TEXT,   -- ISO 8601 date or datetime
     created_at        TEXT    NOT NULL
